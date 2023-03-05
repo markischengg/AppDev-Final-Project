@@ -1,0 +1,71 @@
+<div>
+  <div>
+    <h1>
+      Court #<%= @the_court.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/courts">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_court/<%= @the_court.id %>">
+          Delete court
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Status
+      </dt>
+      <dd>
+        <%= @the_court.status %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_court.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_court.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit court
+    </h2>
+
+    <form action="/modify_court/<%= @the_court.id %>"  method="post" >
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <input type="text" id="status_box" name="query_status" value="<%= @the_court.status %>">
+      </div>
+
+      <button>
+        Update court
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

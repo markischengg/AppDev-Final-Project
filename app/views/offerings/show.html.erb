@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Offering #<%= @the_offering.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/offerings">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_offering/<%= @the_offering.id %>">
+          Delete offering
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        <%= @the_offering.type %>
+      </dd>
+
+      <dt>
+        Cost
+      </dt>
+      <dd>
+        <%= @the_offering.cost %>
+      </dd>
+
+      <dt>
+        Paid
+      </dt>
+      <dd>
+        <%= @the_offering.paid %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_offering.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_offering.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit offering
+    </h2>
+
+    <form action="/modify_offering/<%= @the_offering.id %>"  method="post" >
+      <div>
+        <label for="type_box">
+          Type
+        </label>
+
+        <input type="text" id="type_box" name="query_type" value="<%= @the_offering.type %>">
+      </div>
+
+      <div>
+        <label for="cost_box">
+          Cost
+        </label>
+
+        <input type="text" id="cost_box" name="query_cost" value="<%= @the_offering.cost %>">
+      </div>
+
+      <div>
+        <label for="paid_box">
+          Paid
+        </label>
+
+        <input type="text" id="paid_box" name="query_paid" value="<%= @the_offering.paid %>">
+      </div>
+
+      <button>
+        Update offering
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

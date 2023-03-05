@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      Lessons and Rentals
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new offering
+    </h2>
+
+    <form action="/insert_offering" method="post">
+      <div>
+        <label for="type_box">
+          Type
+        </label>
+
+        <input type="text" id="type_box" name="query_type">
+      </div>
+
+      <div>
+        <label for="cost_box">
+          Cost
+        </label>
+
+        <input type="text" id="cost_box" name="query_cost">
+      </div>
+
+      <div>
+        <label for="paid_box">
+          Paid
+        </label>
+
+        <input type="text" id="paid_box" name="query_paid">
+      </div>
+
+      <button>
+        Create offering
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Type
+        </th>
+
+        <th>
+          Cost
+        </th>
+
+        <th>
+          Paid
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_offerings.each do |an_offering| %>
+      <tr>
+        <td>
+          <%= an_offering.id %>
+        </td>
+
+        <td>
+          <%= an_offering.type %>
+        </td>
+
+        <td>
+          <%= an_offering.cost %>
+        </td>
+
+        <td>
+          <%= an_offering.paid %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_offering.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_offering.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/offerings/<%= an_offering.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

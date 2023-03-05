@@ -1,0 +1,87 @@
+<div>
+  <div>
+    <h1>
+      Booking #<%= @the_booking.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/bookings">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_booking/<%= @the_booking.id %>">
+          Delete booking
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Time
+      </dt>
+      <dd>
+        <%= @the_booking.time %>
+      </dd>
+
+      <dt>
+        Duration
+      </dt>
+      <dd>
+        <%= @the_booking.duration %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_booking.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_booking.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit booking
+    </h2>
+
+    <form action="/modify_booking/<%= @the_booking.id %>"  method="post" >
+      <div>
+        <label for="time_box">
+          Time
+        </label>
+
+        <input type="datetime-local" id="time_box" name="query_time"
+         value="<%= @the_booking.time %>">
+      </div>
+
+      <div>
+        <label for="duration_box">
+          Duration
+        </label>
+
+        <input type="text" id="duration_box" name="query_duration" value="<%= @the_booking.duration %>">
+      </div>
+
+      <button>
+        Update booking
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

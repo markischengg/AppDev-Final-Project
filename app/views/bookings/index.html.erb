@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all bookings
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new booking
+    </h2>
+
+    <form action="/insert_booking" method="post">
+      <div>
+        <label for="time_box">
+          Time
+        </label>
+
+        <input type="datetime-local" id="time_box" name="query_time">
+      </div>
+
+      <div>
+        <label for="duration_box">
+          Duration
+        </label>
+
+        <input type="text" id="duration_box" name="query_duration">
+      </div>
+
+      <button>
+        Create booking
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Time
+        </th>
+
+        <th>
+          Duration
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_bookings.each do |a_booking| %>
+      <tr>
+        <td>
+          <%= a_booking.id %>
+        </td>
+
+        <td>
+          <%= a_booking.time %>
+        </td>
+
+        <td>
+          <%= a_booking.duration %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_booking.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_booking.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/bookings/<%= a_booking.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

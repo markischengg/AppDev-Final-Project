@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      List of all courts
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new court
+    </h2>
+
+    <form action="/insert_court" method="post">
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <input type="text" id="status_box" name="query_status">
+      </div>
+
+      <button>
+        Create court
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_courts.each do |a_court| %>
+      <tr>
+        <td>
+          <%= a_court.id %>
+        </td>
+
+        <td>
+          <%= a_court.status %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_court.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_court.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/courts/<%= a_court.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
