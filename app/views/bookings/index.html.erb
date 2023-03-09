@@ -1,8 +1,14 @@
 <div>
   <div>
-    <h1>
-      List of all bookings
-    </h1>
+    <%if @current_user.type != 'admin'%>
+      <h1>
+        <%= @current_user.first_name %>'s Bookings
+      </h1>
+    <% else %>
+      <h1>
+      List of Current Bookings
+      </h1>
+    <% end %>
   </div>
 </div>
 
@@ -31,6 +37,16 @@
         <input type="text" id="duration_box" name="query_duration">
       </div>
 
+      <div>
+        <label for="court_number_box">
+          Court Number
+        </label>
+
+        <input type="text" id="court_number_box" name="query_court_number">
+      </div>
+
+      
+
       <button>
         Create booking
       </button>
@@ -56,13 +72,11 @@
         </th>
 
         <th>
-          Created at
+          Court Number
         </th>
 
         <th>
-          Updated at
         </th>
-
         <th>
         </th>
       </tr>
@@ -70,7 +84,7 @@
       <% @list_of_bookings.each do |a_booking| %>
       <tr>
         <td>
-          <%= a_booking.id %>
+          <%= a_booking.user.first_name%>
         </td>
 
         <td>
@@ -82,15 +96,18 @@
         </td>
 
         <td>
-          <%= time_ago_in_words(a_booking.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_booking.updated_at) %> ago
+          <%= a_booking.court_id %> 
         </td>
 
         <td>
           <a href="/bookings/<%= a_booking.id %>">
-            Show details
+            Edit Booking
+          </a>
+        </td>
+
+        <td>
+          <a href="/delete_booking/<%= a_booking.id %>">
+            Delete Booking
           </a>
         </td>
       </tr>
