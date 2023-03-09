@@ -11,19 +11,22 @@
         </a>
       </div>
 
-      <div>
-        <a href="/delete_booking/<%= @the_booking.id %>">
-          Delete booking
-        </a>
-      </div>
     </div>
 
     <dl>
+
+      <dt>
+        Date
+      </dt>
+      <dd>
+        <%= @the_booking.time.strftime("%m/%d/%Y") %> 
+      </dd>
+
       <dt>
         Time
       </dt>
       <dd>
-        <%= @the_booking.time %>
+        <%= @the_booking.time.strftime("%H:%M") %> <%= @the_booking.time.strftime("%p") %>
       </dd>
 
       <dt>
@@ -33,19 +36,6 @@
         <%= @the_booking.duration %>
       </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_booking.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_booking.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>

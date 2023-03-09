@@ -23,6 +23,10 @@ class BookingsController < ApplicationController
     the_booking.duration = params.fetch("query_duration")
     the_booking.user_id = session.fetch(:user_id)
     the_booking.court_id = params.fetch("query_court_number")
+    the_booking.date = the_booking.time.strftime("%Y-%m-%d")
+    the_booking.book_time = the_booking.time.strftime("%R %p")
+
+    @current_user.tab = @current_user.tab + 30
 
     if the_booking.valid?
       the_booking.save

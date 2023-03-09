@@ -3,6 +3,8 @@
 # Table name: bookings
 #
 #  id         :integer          not null, primary key
+#  book_time  :time
+#  date       :string
 #  duration   :float
 #  time       :datetime
 #  created_at :datetime         not null

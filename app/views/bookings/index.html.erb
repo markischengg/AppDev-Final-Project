@@ -54,13 +54,16 @@
   </div>
 </div>
 
+
 <hr>
 <div>
+<h2>Current Bookings</h2>
   <div>
     <table border="1">
       <tr>
+
         <th>
-          ID
+          Date
         </th>
 
         <th>
@@ -83,16 +86,17 @@
 
       <% @list_of_bookings.each do |a_booking| %>
       <tr>
+
         <td>
-          <%= a_booking.user.first_name%>
+          <%= a_booking.time.strftime("%m/%d/%Y")%> 
         </td>
 
         <td>
-          <%= a_booking.time %>
+          <%= a_booking.time.strftime("%H:%M") %> <%= a_booking.time.strftime("%p") %>
         </td>
 
         <td>
-          <%= a_booking.duration %>
+          <%= a_booking.duration %> hr(s)
         </td>
 
         <td>
@@ -115,5 +119,22 @@
     </table>
   </div>
 </div>
+
+<hr>
+  <div>
+    <h2>Check Schedule</h2>
+  </div>
+
+  <div id="container">
+    <div id="left">
+      <%= month_calendar do |date| %>
+        <a href="/calendar/<%= date %>">
+            <%= date.day %>
+          </a>
+      <% end %>
+    </div>
+  </div>
+
+</hr>
 
 <hr>

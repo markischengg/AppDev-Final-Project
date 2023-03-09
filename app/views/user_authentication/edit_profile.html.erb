@@ -2,7 +2,6 @@
   <h5>
     Edit User Account
   </h5>
-<% if false %>
  <div>
     <form action="/modify_user" method="post">
       <div>
@@ -18,22 +17,7 @@
         <input id="last_name_box" name="query_last_name" value="<%= @current_user.last_name %>">
       </div>
       <div>
-        <label for="tab_box">Tab</label>
-        <input id="tab_box" name="query_tab" value="<%= @current_user.tab %>">
-      </div>
-      <div>
-        <label for="type_box">Type</label>
-        <input id="type_box" name="query_type" value="<%= @current_user.type %>">
-      </div>
-
-      <div>
-        <label for="password_box">Password</label>
-        <input id="password_box" name="query_password" placeholder="Choose a password..." type="password">
-      </div>
-    
-      <div>
-        <label for="password_confirmation_box">Password Confirmation</label>
-        <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
+        Tab: $<%= @current_user.tab %>
       </div>
 
       <button>
@@ -41,7 +25,6 @@
       </button>
     </form>
   </div>
-  <% end %>
 
   <a href ="/user_sign_out">Sign Out</a>
 

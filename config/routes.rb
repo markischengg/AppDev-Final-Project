@@ -87,4 +87,9 @@ Rails.application.routes.draw do
   get("/user_homepage", { :controller => "user_authentication", :action => "homepage" })  
   #------------------------------
 
+   #------------------------------
+
+  # Routes for the Calendar/Scehdule:
+  get("/calendar/:date", {:controller => "calendar", :action => "show"})
+
 end

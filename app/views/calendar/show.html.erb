@@ -1,0 +1,61 @@
+<a href = '/bookings'>Go back</a>
+<h1>Schedule for: </h1>
+<h2><%= @booking_date.strftime("%A %b %d, %Y") %></h2>
+
+<hr>
+<div>
+<h2>Current Bookings</h2>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          Time
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Duration
+        </th>
+
+        <th>
+          Court Number
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_bookings.each do |a_booking| %>
+      <tr>
+        <td>
+          <%= a_booking.book_time.strftime("%R %p")%>
+        </td>
+
+        <td>
+          Not Available 
+        </td>
+
+        <td>
+          <%= a_booking.duration %> hr(s)
+        </td>
+
+        <td>
+          <%= a_booking.court_id %> 
+        </td>
+
+        <td>
+          <% if a_booking.user_id == @current_user.id%>
+            <p style="color: green">Your Booking</p>
+          <%end%>
+        </td>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+</hr>
