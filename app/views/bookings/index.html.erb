@@ -187,7 +187,7 @@
                 <%end%>
               </td>
 
-              <% if @current_user.type == 'admin'%>
+              <% if @current_user.type = 'admin'%>
                 <td>
                   <a href="/bookings/<%= a_booking.id %>">
                     Edit Booking
