@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   #BOOKING HOMEPAGE
   get("/bookings", { :controller => "bookings", :action => "index"})
 
+  get("/bookingschedule/:date", { :controller => "bookings", action => "index"})
+
   # INSERT BOOKING
   post("/insert_booking", { :controller => "bookings", :action => "create" })
   

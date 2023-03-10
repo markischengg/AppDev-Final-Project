@@ -84,7 +84,7 @@
         </th>
       </tr>
 
-      <% @list_of_bookings.each do |a_booking| %>
+      <% @user_bookings.each do |a_booking| %>
       <tr>
 
         <td>
@@ -128,19 +128,13 @@
   <div class="float-container">
     <div class="float-child">
       <%= month_calendar do |date| %>
-
-        <label for="booking_date">
-          <a href="/bookings">
-            <%= date.day %>
-          </a>
-        </label>
-
-        <input type="hidden" id="booking_date" name="query_booking_date">
+        <a href = "/bookingschedule/<%= date%>"><%= date.day%>
         
       <% end %>
     </div>
-
-    <div class="float-child">
+   
+    <h2><%= @booking_date.strftime("%A %b %d, %Y") %></h2>
+    
         <div>
           <table border="1">
             <tr>
@@ -192,11 +186,9 @@
             <% end %>
           </table>
         </div>
-      </div>
+      
   </div>
 
   
 
 </hr>
-
-
