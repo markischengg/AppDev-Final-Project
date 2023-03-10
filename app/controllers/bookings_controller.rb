@@ -6,28 +6,15 @@ class BookingsController < ApplicationController
       matching_bookings = Booking.all
     end
 
-    if @booking_date != nil
-      @booking_date = params.fetch("date")
-      @booking_date = Date.parse(@booking_date)
-    else
-      @booking_date = Date.today
-    end
-
+    @booking_date = params.fetch("date")
+    @booking_date = Date.parse(@booking_date)
+  
     @list_of_bookings = Booking.where({ :date => @booking_date }).order({ :book_time => :asc})
 
-    @user_bookings = matching_bookings.order({ :created_at => :desc })
+    @user_bookings = matching_bookings.order({ :time => :asc })
+
 
     render({ :template => "bookings/index.html.erb" })
-  end
-
-  def show
-    the_id = params.fetch("path_id")
-
-    matching_bookings = Booking.where({ :id => the_id })
-
-    @the_booking = matching_bookings.at(0)
-
-    render({ :template => "bookings/show.html.erb" })
   end
 
   def create
@@ -41,12 +28,35 @@ class BookingsController < ApplicationController
 
     @current_user.tab = @current_user.tab + 30
 
-    if the_booking.valid?
+    #Get datetime array of all Bookings
+    list_of_bookings = Booking.all
+    time_array = Array.new
+
+    list_of_bookings.each do |a_booking|
+      time_array.push(a_booking.time)
+    end 
+
+    if time_array.include?(the_booking.time) 
+      redirect_to("/bookingschedule/#{the_booking.time}", { :alert => "Booking not available" })
+    elsif the_booking.valid?
       the_booking.save
-      redirect_to("/bookings", { :notice => "Booking created successfully." })
+      redirect_to("/bookingschedule/#{the_booking.time}", { :notice => "Booking created successfully." })
     else
       redirect_to("/bookings", { :alert => the_booking.errors.full_messages.to_sentence })
     end
+
+  end
+
+  def show
+    the_id = params.fetch("path_id")
+
+    matching_bookings = Booking.where({ :id => the_id })
+
+    @the_booking = matching_bookings.at(0)
+
+    @list_of_users = User.all
+
+    render({ :template => "bookings/show.html.erb" })
   end
 
   def update
@@ -55,12 +65,14 @@ class BookingsController < ApplicationController
 
     the_booking.time = params.fetch("query_time")
     the_booking.duration = params.fetch("query_duration")
+    the_booking.date = the_booking.time.strftime("%Y-%m-%d")
+    the_booking.book_time = the_booking.time.strftime("%R %p")
 
     if the_booking.valid?
       the_booking.save
-      redirect_to("/bookings/#{the_booking.id}", { :notice => "Booking updated successfully."} )
+      redirect_to("/bookingschedule/#{the_booking.id}", { :notice => "Booking updated successfully."} )
     else
-      redirect_to("/bookings/#{the_booking.id}", { :alert => the_booking.errors.full_messages.to_sentence })
+      redirect_to("/bookingschedule/#{the_booking.id}", { :alert => the_booking.errors.full_messages.to_sentence })
     end
   end
 
@@ -70,6 +82,6 @@ class BookingsController < ApplicationController
 
     the_booking.destroy
 
-    redirect_to("/bookings", { :notice => "Booking deleted successfully."} )
+    redirect_to("/bookingschedule/#{Date.today}", { :notice => "Booking deleted successfully."} )
   end
 end

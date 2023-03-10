@@ -6,7 +6,7 @@
 
     <div>
       <div>
-        <a href="/bookings">
+        <a href="/bookingschedule/<%= @the_booking.time%>">
           Go back
         </a>
       </div>
@@ -14,6 +14,13 @@
     </div>
 
     <dl>
+
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_booking.user.first_name%> 
+      </dd>
 
       <dt>
         Date

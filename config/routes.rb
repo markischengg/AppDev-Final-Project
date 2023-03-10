@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
 
   # Routes for the Offering resource:
+  get("/", { :controller => "user_authentication", :action => "sign_in_form"})
+
+  # SIGN IN FORM
+  get("/user_sign_in", { :controller => "user_authentication", :action => "sign_in_form" })
+  
+  # AUTHENTICATE AND STORE COOKIE
+  post("/user_verify_credentials", { :controller => "user_authentication", :action => "create_cookie" })
+  
+  # SIGN OUT        
+  get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
+
+  #USER HOMEPAGE
+  get("/user_homepage", { :controller => "user_authentication", :action => "homepage" })  
+  #------------------------------
 
   #SELECT A OFFERING HOMEPAGE
   get("/offerings", { :controller => "offerings", :action => "index"})
@@ -23,7 +37,7 @@ Rails.application.routes.draw do
   #BOOKING HOMEPAGE
   get("/bookings", { :controller => "bookings", :action => "index"})
 
-  get("/bookingschedule/:date", { :controller => "bookings", action => "index"})
+  get("/bookingschedule/:date", { :controller => "bookings", :action => "index"})
 
   # INSERT BOOKING
   post("/insert_booking", { :controller => "bookings", :action => "create" })
@@ -58,7 +72,6 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  get("/", { :controller => "user_authentication", :action => "sign_in_form"})
 
   # Routes for the User account:
 
@@ -77,17 +90,6 @@ Rails.application.routes.draw do
 
   # ------------------------------
 
-  # SIGN IN FORM
-  get("/user_sign_in", { :controller => "user_authentication", :action => "sign_in_form" })
-  # AUTHENTICATE AND STORE COOKIE
-  post("/user_verify_credentials", { :controller => "user_authentication", :action => "create_cookie" })
-  
-  # SIGN OUT        
-  get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
-
-  #USER HOMEPAGE
-  get("/user_homepage", { :controller => "user_authentication", :action => "homepage" })  
-  #------------------------------
 
    #------------------------------
 

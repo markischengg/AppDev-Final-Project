@@ -56,69 +56,74 @@
 
 
 <hr>
-<div>
-<h2>Current Bookings</h2>
+<% if @current_user.type != 'admin'%>
   <div>
-    <table border="1">
-      <tr>
+  <h2>Upcoming Bookings</h2>
+    <div>
+      <table border="1">
+        <tr>
 
-        <th>
-          Date
-        </th>
+          <th>
+            Date
+          </th>
 
-        <th>
-          Time
-        </th>
+          <th>
+            Time
+          </th>
 
-        <th>
-          Duration
-        </th>
+          <th>
+            Duration
+          </th>
 
-        <th>
-          Court Number
-        </th>
+          <th>
+            Court Number
+          </th>
 
-        <th>
-        </th>
-        <th>
-        </th>
-      </tr>
+          <th>
+          </th>
+          <th>
+          </th>
+        </tr> 
 
-      <% @user_bookings.each do |a_booking| %>
-      <tr>
+        <% @user_bookings.each do |a_booking| %>
+          <% if a_booking.time < Date.today%>
+          <% else %>
+            <tr>
 
-        <td>
-          <%= a_booking.time.strftime("%m/%d/%Y")%> 
-        </td>
+              <td>
+                <%= a_booking.time.strftime("%m/%d/%Y")%> 
+              </td>
 
-        <td>
-          <%= a_booking.time.strftime("%H:%M") %> <%= a_booking.time.strftime("%p") %>
-        </td>
+              <td>
+                <%= a_booking.time.strftime("%H:%M") %> <%= a_booking.time.strftime("%p") %>
+              </td>
 
-        <td>
-          <%= a_booking.duration %> hr(s)
-        </td>
+              <td>
+                <%= a_booking.duration %> hr(s)
+              </td>
 
-        <td>
-          <%= a_booking.court_id %> 
-        </td>
+              <td>
+                <%= a_booking.court_id %> 
+              </td>
 
-        <td>
-          <a href="/bookings/<%= a_booking.id %>">
-            Edit Booking
-          </a>
-        </td>
+              <td>
+                <a href="/bookings/<%= a_booking.id %>">
+                  Edit Booking
+                </a>
+              </td>
 
-        <td>
-          <a href="/delete_booking/<%= a_booking.id %>">
-            Delete Booking
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+              <td>
+                <a href="/delete_booking/<%= a_booking.id %>">
+                  Delete Booking
+                </a>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table> 
+    </div>
   </div>
-</div>
+<% end %>
 
 <hr>
   <div>
@@ -133,7 +138,9 @@
       <% end %>
     </div>
    
-    <h2><%= @booking_date.strftime("%A %b %d, %Y") %></h2>
+    <h2>
+    <%= @booking_date.strftime("%A %b %d, %Y") %>
+    </h2>
     
         <div>
           <table border="1">
@@ -154,8 +161,6 @@
                 Court Number
               </th>
 
-              <th>
-              </th>
             </tr>
 
             <% @list_of_bookings.each do |a_booking| %>
@@ -182,13 +187,25 @@
                 <%end%>
               </td>
 
+              <% if @current_user.type == 'admin'%>
+                <td>
+                  <a href="/bookings/<%= a_booking.id %>">
+                    Edit Booking
+                  </a>
+                </td>
+
+                <td>
+                  <a href="/delete_booking/<%= a_booking.id %>">
+                    Delete Booking
+                  </a>
+                </td>
+              <% end %>
+
             </tr>
             <% end %>
           </table>
         </div>
       
   </div>
-
-  
 
 </hr>
