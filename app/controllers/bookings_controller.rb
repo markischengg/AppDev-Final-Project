@@ -1,6 +1,20 @@
 class BookingsController < ApplicationController
   def index
-    matching_bookings = Booking.all
+    if @current_user.type != 'admin'
+      matching_bookings = Booking.where({ :user_id => @current_user.id })
+    else
+      matching_bookings = Booking.all
+    end
+
+    if @booking_date != nil
+      @booking_date = params.fetch("query_booking_date")
+      @booking_date = Date.parse(@booking_date)
+    else
+      @booking_date = Date.today
+    end
+
+    @matching_bookings = Booking.all
+    @list_of_bookings = Booking.where({ :date => @booking_date }).order({ :book_time => :asc})
 
     @list_of_bookings = matching_bookings.order({ :created_at => :desc })
 

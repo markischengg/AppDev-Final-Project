@@ -125,16 +125,78 @@
     <h2>Check Schedule</h2>
   </div>
 
-  <div id="container">
-    <div id="left">
+  <div class="float-container">
+    <div class="float-child">
       <%= month_calendar do |date| %>
-        <a href="/calendar/<%= date %>">
+
+        <label for="booking_date">
+          <a href="/bookings">
             <%= date.day %>
           </a>
+        </label>
+
+        <input type="hidden" id="booking_date" name="query_booking_date">
+        
       <% end %>
     </div>
+
+    <div class="float-child">
+        <div>
+          <table border="1">
+            <tr>
+              <th>
+                Time
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Duration
+              </th>
+
+              <th>
+                Court Number
+              </th>
+
+              <th>
+              </th>
+            </tr>
+
+            <% @list_of_bookings.each do |a_booking| %>
+            <tr>
+              <td>
+                <%= a_booking.book_time.strftime("%R %p")%>
+              </td>
+
+              <td>
+                Not Available 
+              </td>
+
+              <td>
+                <%= a_booking.duration %> hr(s)
+              </td>
+
+              <td>
+                <%= a_booking.court_id %> 
+              </td>
+
+              <td>
+                <% if a_booking.user_id == @current_user.id%>
+                  <p style="color: green">Your Booking</p>
+                <%end%>
+              </td>
+
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
   </div>
+
+  
 
 </hr>
 
-<hr>
+
